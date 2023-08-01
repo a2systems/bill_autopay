@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="bill_autopay_account_move_form" model="ir.ui.view">
+	<field name="name">bill_autopay.account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"></field>
+	<field name="arch" type="xml">
+		<field name="to_check" position="after">
+			<field name="autopay_journal_id"
+				attrs="{'invisible': [('move_type','not in',['in_invoice'])]}"
+				states="draft"
+				options="{'no_quick_create': True, 'no_create_edit' : True}" />
+			<field name="autopay_payment_id" readonly="1"
+				attrs="{'invisible': [('move_type','not in',['in_invoice'])]}"
+				/>
+		</field>
+        </field>
+    </record>
+
+
+</odoo>
